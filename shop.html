@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="slg-mode" content="demo">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wholesale Trade Ordering — Sam's Liquor Group</title>
+<meta name="description" content="Trade ordering for taverns, bottle stores, shisanyamas and restaurants. Build an order, we confirm stock and price before anything is charged.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles/tokens.css">
+<link rel="stylesheet" href="styles/app.css">
+</head>
+<body>
+
+<header class="hdr">
+  <div class="hdr-in">
+    <a class="brand" href="./">
+      <span class="brand-mark">SLG</span>
+      <span class="brand-txt">Sam's Liquor Group</span>
+    </a>
+
+    <form class="search" role="search" id="search-form">
+      <svg class="search-ico" viewBox="0 0 24 24" aria-hidden="true">
+        <circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/>
+      </svg>
+      <input id="search" type="search" autocomplete="off" spellcheck="false"
+             placeholder="Search by name, category or IQ stock code…"
+             aria-label="Search the catalogue">
+      <button type="button" class="search-clear" id="search-clear" hidden aria-label="Clear search">&times;</button>
+    </form>
+
+    <div class="hdr-actions">
+      <button class="icon-btn" id="theme-toggle" aria-label="Switch theme"></button>
+      <button class="cart-btn" id="cart-btn">
+        My order <span class="cart-count" id="cart-count">0</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="intro">
+    <p class="kicker">Wholesale trade ordering</p>
+    <h1>Build your order.<br>We confirm before anything is charged.</h1>
+    <p class="lede">
+      No online payment. Add stock to your order and send it through — the first
+      of our four stores able to fulfil it confirms stock, price and delivery.
+      You pay on delivery, on collection, or on account.
+    </p>
+    <p class="stamp" id="price-stamp" hidden>
+      <span class="dot"></span><span id="price-stamp-txt"></span>
+    </p>
+  </section>
+
+  <nav class="rail" id="rail" aria-label="Categories"></nav>
+
+  <div class="toolbar">
+    <p class="count" id="count" aria-live="polite"></p>
+    <label class="sort">
+      <span>Sort</span>
+      <select id="sort">
+        <option value="name">A–Z</option>
+        <option value="popular">Most ordered</option>
+        <option value="price_asc">Price: low to high</option>
+        <option value="price_desc">Price: high to low</option>
+      </select>
+    </label>
+  </div>
+
+  <div id="grid" class="grid" aria-busy="true"></div>
+  <div id="pager" class="pager" hidden></div>
+</main>
+
+<footer class="foot">
+  <p>Sam's Liquor Group — Thokoza · Nhlapo · Mosiliki · Rondebult</p>
+  <p class="foot-note">
+    Prices include VAT at 15%. Stock is confirmed by the store when your order is
+    quoted; nothing on this page is a guarantee of availability.
+  </p>
+</footer>
+
+<script type="module" src="app/shop/main.js"></script>
+</body>
+</html>

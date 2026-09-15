@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sam's Liquor Group — testing build</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root { --bg:#0E0E0E; --panel:#141414; --line:rgba(255,255,255,.1); --txt:#fff;
+          --txt-2:rgba(255,255,255,.66); --txt-3:rgba(255,255,255,.45); --accent:#F3A712; --on-accent:#0E0E0E; }
+  * { box-sizing:border-box }
+  html,body { height:100% }
+  body { margin:0; background:var(--bg); color:var(--txt);
+         font-family:Archivo,system-ui,-apple-system,"Segoe UI",sans-serif;
+         display:flex; flex-direction:column; -webkit-font-smoothing:antialiased }
+  .warn { display:flex; align-items:center; gap:12px; flex-wrap:wrap; padding:9px 16px;
+          background:repeating-linear-gradient(45deg,#F3A712,#F3A712 12px,#d9950a 12px,#d9950a 24px); color:#0E0E0E }
+  .warn b { font-size:12px; letter-spacing:.04em; text-transform:uppercase; flex:1 1 auto }
+  .warn button { font:700 11.5px Archivo,sans-serif; letter-spacing:.04em; text-transform:uppercase;
+                 background:rgba(0,0,0,.82); color:#fff; border:0; border-radius:5px; padding:6px 11px; cursor:pointer }
+  header { display:flex; align-items:center; gap:14px; padding:12px 16px; border-bottom:1px solid var(--line); flex-wrap:wrap }
+  .brand { display:flex; align-items:center; gap:9px; font-weight:800; font-size:14px }
+  .mark { width:30px;height:30px;border-radius:7px;background:var(--accent);color:var(--on-accent);
+          display:grid;place-items:center;font-weight:900;font-size:11px }
+  .tabs { display:flex; gap:6px; overflow-x:auto; scrollbar-width:none }
+  .tabs::-webkit-scrollbar { display:none }
+  .tab { white-space:nowrap; padding:9px 14px; border-radius:8px; cursor:pointer; font:600 13px Archivo,sans-serif;
+         background:transparent; border:1px solid var(--line); color:var(--txt-2) }
+  .tab:hover { color:var(--txt); border-color:rgba(255,255,255,.24) }
+  .tab[aria-selected="true"] { background:var(--accent); border-color:var(--accent); color:var(--on-accent); font-weight:800 }
+  .spacer { flex:1 1 auto }
+  .pop { font:700 12px Archivo,sans-serif; color:var(--txt-2); text-decoration:none; border:1px solid var(--line);
+         padding:8px 12px; border-radius:8px; white-space:nowrap }
+  .pop:hover { color:var(--accent); border-color:var(--accent) }
+  main { flex:1 1 auto; position:relative; min-height:0 }
+  iframe { width:100%; height:100%; border:0; display:block; background:var(--bg) }
+  /* overview */
+  .overview { position:absolute; inset:0; overflow-y:auto; padding:44px 22px 60px }
+  .ov-in { max-width:900px; margin:0 auto }
+  .kick { font-size:11.5px; letter-spacing:.17em; text-transform:uppercase; color:var(--accent); font-weight:700 }
+  h1 { font-size:clamp(26px,4.4vw,40px); line-height:1.08; font-weight:900; letter-spacing:-.02em; margin:10px 0 12px }
+  .lede { color:var(--txt-2); font-size:15px; line-height:1.6; max-width:62ch; margin:0 0 30px }
+  .cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:14px }
+  .card { text-align:left; cursor:pointer; padding:18px; border-radius:13px;
+          background:var(--panel); border:1px solid var(--line); color:inherit; font:inherit }
+  .card:hover { border-color:var(--accent) }
+  .card-t { display:block; font-size:15.5px; font-weight:800; margin-bottom:6px }
+  .card-d { display:block; font-size:13px; color:var(--txt-2); line-height:1.55 }
+  .note { margin-top:30px; padding:16px 18px; border-radius:12px; border:1px solid var(--line); background:var(--panel) }
+  .note h2 { font-size:13px; letter-spacing:.1em; text-transform:uppercase; color:var(--accent); margin:0 0 10px }
+  .note ul { margin:0; padding-left:18px; color:var(--txt-2); font-size:13.5px; line-height:1.75 }
+  .note code { background:rgba(255,255,255,.07); padding:1px 6px; border-radius:4px; font-size:12.5px }
+</style>
+</head>
+<body>
+
+<div class="warn">
+  <b>Testing build — demo data. Nothing here reaches the real system.</b>
+  <button id="reset">Reset demo</button>
+</div>
+
+<header>
+  <div class="brand"><span class="mark">SLG</span> Testing build</div>
+  <div class="tabs" role="tablist">
+    <button class="tab" data-src="" data-key="overview" aria-selected="true">Overview</button>
+      <button class="tab" data-src="shop.html" data-key="shop">Wholesale Shop</button>
+      <button class="tab" data-src="desk.html" data-key="desk">Trade Desk</button>
+      <button class="tab" data-src="fleet/index.html" data-key="fleet">Fleet Care</button>
+      <button class="tab" data-src="site/index.html" data-key="home">Public Site</button>
+      <button class="tab" data-src="site/event-bars.html" data-key="events">Event Bars</button>
+      <button class="tab" data-src="site/locations.html" data-key="stores">Locations</button>
+  </div>
+  <div class="spacer"></div>
+  <a class="pop" id="pop" href="shop.html" target="_blank" rel="noopener">Open full screen ↗</a>
+</header>
+
+<main>
+  <div class="overview" id="overview">
+    <div class="ov-in">
+      <p class="kick">Sam's Liquor Group</p>
+      <h1>Everything built so far, in one place.</h1>
+      <p class="lede">Each tab above opens a working part of the build. It all runs on demo
+         data held in this browser, so you can place orders, claim them and click anything
+         without touching the live system. Nothing is saved anywhere else.</p>
+      <div class="cards">
+      <button class="card" data-src="shop.html" data-key="shop">
+        <span class="card-t">Wholesale Shop</span>
+        <span class="card-d">What a trade customer sees — browse, pick pack sizes, place an order.</span>
+      </button>
+      <button class="card" data-src="desk.html" data-key="desk">
+        <span class="card-t">Trade Desk</span>
+        <span class="card-d">What the counter sees — the shared queue, claiming, ageing.</span>
+      </button>
+      <button class="card" data-src="fleet/index.html" data-key="fleet">
+        <span class="card-t">Fleet Care</span>
+        <span class="card-d">Vehicle inspections, fuel, repairs and compliance. Sign in with a staff number.</span>
+      </button>
+      <button class="card" data-src="site/index.html" data-key="home">
+        <span class="card-t">Public Site</span>
+        <span class="card-d">The public-facing home page for the group.</span>
+      </button>
+      <button class="card" data-src="site/event-bars.html" data-key="events">
+        <span class="card-t">Event Bars</span>
+        <span class="card-d">The event bar service page, with the enquiry form.</span>
+      </button>
+      <button class="card" data-src="site/locations.html" data-key="stores">
+        <span class="card-t">Locations</span>
+        <span class="card-d">The four stores, wholesale counters and DC partners.</span>
+      </button>
+      </div>
+      <div class="note">
+        <h2>What to try</h2>
+        <ul>
+          <li><b>Wholesale Shop</b> — search a product name or an IQ stock code (<code>CA456</code>, <code>BU035</code>). Products with more than one pack size let you switch between single, case and bulk, each at its own price.</li>
+          <li>Build an order and send it — you'll get a reference back.</li>
+          <li><b>Trade Desk</b> — sign in as any of the demo staff. The order you just placed is at the top of the queue, unclaimed.</li>
+          <li>Claim it. Sign in as someone from a different store and see that they can't claim it twice.</li>
+          <li><b>Fleet Care</b> — sign in with a staff number and PIN on the keypad. Admin <code>100</code> / <code>9999</code>, fleet controller <code>301</code> / <code>5005</code>, workshop <code>302</code> / <code>6006</code> (five vehicles only), driver <code>401</code> / <code>1001</code>. Try each — what you see changes with who you are.</li>
+          <li><b>Reset demo</b> in the amber bar puts everything back to the start.</li>
+        </ul>
+      </div>
+      <div class="note">
+        <h2>What is not real yet</h2>
+        <ul>
+          <li>The catalogue is an 84-product sample of the real 766. Prices and codes are real.</li>
+          <li>Staff sign-in has no password in this build — it is a role switcher.</li>
+          <li>Quoting, picking and the price-list admin are not built yet.</li>
+          <li>The Event Bars enquiry form needs its EmailJS template before it will send.</li>
+          <li>Fleet Care is the design prototype on seeded data — all 18 screens are shown so the team can decide which to keep for V1. Nothing in it is saved anywhere.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <iframe id="frame" title="Preview" hidden></iframe>
+</main>
+
+<script>
+(function () {
+  var tabs = [].slice.call(document.querySelectorAll('.tab'));
+  var cards = [].slice.call(document.querySelectorAll('.card'));
+  var frame = document.getElementById('frame');
+  var overview = document.getElementById('overview');
+  var pop = document.getElementById('pop');
+
+  function select(key) {
+    var hit = tabs.filter(function (t) { return t.dataset.key === key; })[0] || tabs[0];
+    tabs.forEach(function (t) { t.setAttribute('aria-selected', String(t === hit)); });
+    var src = hit.dataset.src;
+    if (!src) {
+      frame.hidden = true; overview.hidden = false; pop.href = 'shop.html';
+    } else {
+      if (frame.getAttribute('src') !== src) frame.setAttribute('src', src);
+      frame.hidden = false; overview.hidden = true; pop.href = src;
+    }
+    if (location.hash.slice(1) !== hit.dataset.key) {
+      history.replaceState(null, '', '#' + hit.dataset.key);
+    }
+  }
+
+  tabs.forEach(function (t) { t.addEventListener('click', function () { select(t.dataset.key); }); });
+  cards.forEach(function (c) { c.addEventListener('click', function () { select(c.dataset.key); }); });
+  window.addEventListener('hashchange', function () { select(location.hash.slice(1) || 'overview'); });
+
+  document.getElementById('reset').addEventListener('click', function () {
+    if (!confirm('Reset the demo? This clears the demo orders, basket and signed-in staff in this browser.')) return;
+    try {
+      Object.keys(localStorage).filter(function (k) { return k.indexOf('slg') === 0 || k.indexOf('slg-') === 0; })
+        .forEach(function (k) { localStorage.removeItem(k); });
+    } catch (e) {}
+    frame.removeAttribute('src');
+    alert('Demo reset. Open a tab to start again.');
+    select('overview');
+  });
+
+  select(location.hash.slice(1) || 'overview');
+})();
+</script>
+</body>
+</html>
