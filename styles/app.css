@@ -380,3 +380,18 @@ textarea.input { resize: vertical; font-family: inherit; }
 .demo-login:hover { border-color: var(--accent); }
 .demo-login-n { display: block; font-size: 14px; font-weight: 700; }
 .demo-login-r { display: block; font-size: 11.5px; color: var(--txt-2); margin-top: 2px; }
+
+/* checkout totals + deposit line */
+.sub-dep b { font-size: 15px; color: var(--txt-2); }
+.totals { display: flex; flex-direction: column; gap: 6px; margin-bottom: 12px; }
+.trow { display: flex; justify-content: space-between; gap: 12px; font-size: 13px; color: var(--txt-2); }
+.trow b { font-weight: 700; color: var(--txt); }
+.trow.is-dep b { color: var(--txt-2); font-weight: 600; }
+.trow.is-total { border-top: 1px solid var(--line); padding-top: 8px; margin-top: 2px; font-size: 14px; }
+.trow.is-total b { font-size: 19px; font-weight: 800; letter-spacing: -.02em; }
+.done-tot { font-size: 13px; color: var(--txt-2); margin: -8px 0 16px; }
+.done-tot b { color: var(--txt); }
+
+/* header text links styled as buttons (shared with the desk) */
+.link-btn { width: auto; padding: 0 12px; display: grid; place-items: center; text-decoration: none; color: var(--txt); font-size: 12.5px; font-weight: 700; }
+.link-btn:hover { color: var(--accent); }

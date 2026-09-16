@@ -11,6 +11,7 @@ import { PAGE_SIZE, DEMO } from '../config.js';
 import * as cart from './cart.js';
 import * as drawer from './checkout.js';
 import { renderMedia, loadManifest } from './images.js';
+import { orderableOptions } from '../rules.js';
 
 const $ = (id) => document.getElementById(id);
 const el = $('grid'), railEl = $('rail'), countEl = $('count'), pagerEl = $('pager');
@@ -99,7 +100,9 @@ function card(p) {
      real data proves (Black Label single R21,00 x 12 = R252, case R256,00).
      So choosing a pack switches the code we order and reads that code's own
      price. Nothing here multiplies. */
-  const opts = (p.options || []).slice().sort((a, b) =>
+  // Rule 2 (16/09/2026): singles only for spirits. A non-spirit that has only a
+  // single stays visible; one that also has a case shows the case and bulk only.
+  const opts = orderableOptions(p).slice().sort((a, b) =>
     (a.pack - b.pack) || String(a.unit_type).localeCompare(String(b.unit_type)));
   let sel = opts.find((o) => o.code === p.primary_code) || opts[0];
   if (!sel) return c;

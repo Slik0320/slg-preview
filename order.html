@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="slg-mode" content="demo">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Your order — Sam's Liquor Group</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles/tokens.css">
+<link rel="stylesheet" href="styles/app.css">
+<link rel="stylesheet" href="styles/order.css">
+</head>
+<body>
+
+<header class="hdr">
+  <div class="hdr-in">
+    <a class="brand" href="shop.html">
+      <span class="brand-mark">SLG</span>
+      <span class="brand-txt">Sam's Liquor Group</span>
+    </a>
+    <div class="hdr-actions">
+      <a class="icon-btn link-btn" href="shop.html">Catalogue</a>
+      <button class="icon-btn" id="theme-toggle" aria-label="Switch theme"></button>
+    </div>
+  </div>
+</header>
+
+<main class="order-main">
+  <section id="lookup" class="lookup">
+    <p class="kicker">Your order</p>
+    <h1>Find your order.</h1>
+    <p class="lede">Enter the reference we gave you and the phone number you ordered with.</p>
+    <form id="lookup-form" class="lookup-form" novalidate>
+      <label class="field"><span class="field-lab">Order reference</span>
+        <input class="input mono" id="lk-ref" placeholder="SLG-Q123456" autocomplete="off" required></label>
+      <label class="field"><span class="field-lab">Phone number</span>
+        <input class="input" id="lk-phone" type="tel" placeholder="072 000 0000" autocomplete="tel" required></label>
+      <div class="form-error" id="lk-error" hidden></div>
+      <button class="btn-primary" type="submit">Show my order</button>
+    </form>
+  </section>
+
+  <section id="order" hidden></section>
+</main>
+
+<script type="module" src="app/shop/order.js"></script>
+</body>
+</html>

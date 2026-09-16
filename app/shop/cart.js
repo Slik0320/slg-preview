@@ -12,6 +12,8 @@
  * moved a price since the item was added.
  */
 
+import { depositFor } from '../rules.js';
+
 const KEY = 'slg_cart_v1';
 const listeners = new Set();
 
@@ -35,6 +37,10 @@ export function isEmpty() { return read().length === 0; }
 export function subtotal() {
   return read().reduce((t, l) => t + l.qty * (Number(l.price_incl) || 0), 0);
 }
+/** Refundable deposit expected on crates and empties across the order. */
+export function deposit() {
+  return read().reduce((t, l) => t + l.qty * (Number(l.deposit_incl) || 0), 0);
+}
 
 export function add(option, product, qty = 1) {
   const cart = read();
@@ -50,6 +56,8 @@ export function add(option, product, qty = 1) {
     price_incl: option.price_incl,
     crates: option.crates || 0,
     empties: option.empties || 0,
+    // expected back on return — beer 660ml+ at R16 crate / R2 empty (rule 5)
+    deposit_incl: depositFor(product, option, 1),
   });
   write(cart);
 }
